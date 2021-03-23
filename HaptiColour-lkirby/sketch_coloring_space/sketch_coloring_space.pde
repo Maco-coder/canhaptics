@@ -98,6 +98,9 @@ HashMap<Wall, FBox> wallToWorldList;
 FCircle end;
 FBox l1; 
 
+/* Translucent circle */
+FCircle  C ;
+
 /* Initialization of player token */
 HVirtualCoupling  playerToken;
 
@@ -159,6 +162,17 @@ void setup() {
   world.setEdges((edgeTopLeftX), (edgeTopLeftY), (edgeBottomRightX), (edgeBottomRightY)); 
   world.setEdgesRestitution(.4);
   world.setEdgesFriction(0.5);
+
+
+
+/* Translucent circle */
+  C = new FCircle(1.5)  ;
+  C.setDensity(1)       ;
+  C.setSensor(true)     ;
+  C.setNoFill()         ;
+  C.setStroke(0,0,0,255);
+  C.setPosition(-3,3)   ;
+  world.add(C)          ;
 
 
   //gui specific buttons
@@ -258,6 +272,8 @@ class SimulationThread implements Runnable {
     }
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
+    //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                   ;
+    //println(playerToken.h_avatar.getTouching())                                               ;
 
 
     playerToken.updateCouplingForce();
