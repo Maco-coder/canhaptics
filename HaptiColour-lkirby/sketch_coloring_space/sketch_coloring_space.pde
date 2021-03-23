@@ -272,8 +272,8 @@ class SimulationThread implements Runnable {
     }
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
-    //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                   ;
-    //println(playerToken.h_avatar.getTouching())                                               ;
+    C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                   ;
+    //println(playerToken.h_avatar.getTouching())                                             ;
 
 
     playerToken.updateCouplingForce();
@@ -288,6 +288,10 @@ class SimulationThread implements Runnable {
     } else {
         playerToken.h_avatar.setDamping(500);
     }
+    
+    //if(playerToken.h_avatar.isTouchingBody(wall)){
+    //}
+    
 
     world.step(1.0f/1000.0f);
     renderingForce = false;
@@ -354,7 +358,9 @@ void createMazeEnd(float x, float y) {
 }
 
 void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsException {
-
+  
+  println(wallList);
+  
   FBox wall;
   for (Wall item : wallList) {
     /* creation of wall */
