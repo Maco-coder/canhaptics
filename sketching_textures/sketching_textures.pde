@@ -419,7 +419,7 @@ void draw(){
   /* For "dist" method to grab increase damping */
   //text("Haply X = " + s.h_avatar.getX(), 40, 60)  ;
   //text("Haply Y = " + s.h_avatar.getY(), 250, 60) ;
-  text("timer2 = " + t2, 40, 90)   ;
+  //text("timer2 = " + t2, 40, 90)   ;
   //text("fEEx = " + fEE.x, 40, 110);
   //text("fEEy = " + fEE.y, 40, 130);
   textSize(16)                 ;
