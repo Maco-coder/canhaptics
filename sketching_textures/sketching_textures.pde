@@ -14,7 +14,7 @@ ControlP5 cp5;
 
 /* device block definitions ********************************************************************************************/
 Board             haplyBoard;
-Device            widgetOne;
+Device            widgetOne ;
 Mechanisms        pantograph;
 
 byte              widgetOneID                         = 5;
