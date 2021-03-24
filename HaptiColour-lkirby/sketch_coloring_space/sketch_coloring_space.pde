@@ -273,7 +273,7 @@ class SimulationThread implements Runnable {
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
     //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
-    println(playerToken.h_avatar.getTouching())                                             ;
+    println(playerToken.h_avatar.getTouching())                                               ;
     
 
     playerToken.updateCouplingForce();
@@ -288,6 +288,10 @@ class SimulationThread implements Runnable {
     } else {
         playerToken.h_avatar.setDamping(500);
     }
+    
+    //if(playerToken.h_avatar.isTouchingBody(wallList.get(item))){
+      
+    //}
     
 
     world.step(1.0f/1000.0f);
@@ -480,14 +484,14 @@ void drawShape(PGraphics layer) {
 }
 
 void drawCursor(PGraphics layer) {
-  layer.noFill();
-  layer.stroke(0, 0, 0);
+  layer.noFill()                                                                                   ;
+  layer.stroke(0, 0, 0)                                                                            ;
   layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 30, 30);
-  layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 2, 2);
-  layer.stroke(255, 255, 255);
+  layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 2, 2)  ;
+  layer.stroke(255, 255, 255)                                                                      ;
   layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 32, 32);
-  layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 4, 4);
-  world.draw();
+  layer.ellipse(playerToken.getAvatarPositionX()*40, (playerToken.getAvatarPositionY())*40, 4, 4)  ;
+  world.draw()                                                                                     ;
 }
 
 void drawCircle(PGraphics layer) {
