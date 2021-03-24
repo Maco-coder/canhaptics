@@ -273,8 +273,8 @@ class SimulationThread implements Runnable {
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
     //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
-    //println(playerToken.h_avatar.getTouching())                                             ;
-
+    println(playerToken.h_avatar.getTouching())                                             ;
+    
 
     playerToken.updateCouplingForce();
     fEE.set(-playerToken.getVirtualCouplingForceX(), playerToken.getVirtualCouplingForceY());
@@ -312,7 +312,7 @@ ArrayList<Wall> parseTextFile() throws incorrectMazeDimensionsException {
   }
 
   String line = lines[0]; // height and width of maze
-  String[] mazeWH = line.split(" ");
+  String[] mazeWH = line.split(" ")      ;
   int mazeW = Integer.parseInt(mazeWH[0]);
   int mazeH = Integer.parseInt(mazeWH[1]);
 
@@ -340,18 +340,17 @@ ArrayList<Wall> parseTextFile() throws incorrectMazeDimensionsException {
       System.out.println(line);
     }
   }
-
   return wallList;
 }
 
 void createMazeEnd(float x, float y) {
   /* Finish Button */
-  end = new FCircle(1.0);
-  end.setPosition(x, y);
-  end.setFill(200, 0, 0);
+  end = new FCircle(1.0) ;
+  end.setPosition(x, y)  ;
+  end.setFill(200, 0, 0) ;
   end.setStaticBody(true);
-  end.setSensor(true);
-  world.add(end);
+  end.setSensor(true)    ;
+  world.add(end)         ;
 }
 
 void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsException {
@@ -396,7 +395,6 @@ void setWallFlexibility(boolean flexibility, int wallColor) {
     wallInWorld.setSensor(flexibility)     ;
     wallInWorld.setFillColor(wallColor)    ;
     wallInWorld.setStrokeColor(wallColor)  ;
-    world.add(wallInWorld)                 ;
   }
 }
 
