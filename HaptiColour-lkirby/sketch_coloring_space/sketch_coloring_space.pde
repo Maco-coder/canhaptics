@@ -289,7 +289,7 @@ class SimulationThread implements Runnable {
         playerToken.h_avatar.setDamping(500);
     }
     
-    //if(playerToken.h_avatar.isTouchingBody(wallList.get(item))){
+    //if(playerToken.h_avatar.isTouchingBody()){
       
     //}
     
@@ -359,7 +359,7 @@ void createMazeEnd(float x, float y) {
 
 void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsException {
   
-  println(wallList);
+  //println(wallList);
   
   FBox wall;
   for (Wall item : wallList) {
@@ -377,8 +377,10 @@ void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsExceptio
     wall.setStrokeColor(c)          ;
     wallToWorldList.put(item, wall) ; //associate wallList item to FBox representation
     world.add(wall)                 ;
-    wall.setName(wall.toString())   ;
-    println(wall.getX(),wall.getY());
+    wall.setName(item.toString())   ;
+    println(item.getX(),item.getY());
+    println(wall.getName())         ;
+    println(wallToWorldList.get(item));
   }
 }
 
@@ -519,6 +521,7 @@ void createColorPicker(ColorPalette palette) {
     colorSwatch[i].setStatic(true)   ;
     colorSwatch[i].setSensor(true)   ;
     colorSwatch[i].setName(i.toString());
+    //println(colorSwatch[i].getName()) ;
 
     swatch = palette.getSwatch(i);
     colorSwatch[i].setFillColor(color(swatch.getRed(), swatch.getGreen(), swatch.getBlue()));
