@@ -158,7 +158,7 @@ void setup() {
   }
 
   /* world conditions setup */
-  world.setGravity((0.0), (1000.0)); //1000 cm/(s^2)
+  world.setGravity((0.0), (1.0)); //1000 cm/(s^2)
   world.setEdges((edgeTopLeftX), (edgeTopLeftY), (edgeBottomRightX), (edgeBottomRightY)); 
   world.setEdgesRestitution(.4);
   world.setEdgesFriction(0.5);
@@ -289,7 +289,7 @@ class SimulationThread implements Runnable {
         playerToken.h_avatar.setDamping(500);
     }
     
-    //if(playerToken.h_avatar.isTouchingBody(wall)){
+    //if(playerToken.h_avatar.isTouchingBody(wallToWorldList)){
     //}
     
 
@@ -395,9 +395,9 @@ void setWallFlexibility(boolean flexibility, int wallColor) {
   FBox wallInWorld;
   for (Wall item : wallList) {
     wallInWorld = wallToWorldList.get(item);
-    wallInWorld.setSensor(flexibility);
-    wallInWorld.setFillColor(wallColor);
-    wallInWorld.setStrokeColor(wallColor);
+    wallInWorld.setSensor(flexibility)     ;
+    wallInWorld.setFillColor(wallColor)    ;
+    wallInWorld.setStrokeColor(wallColor)  ;
   }
 }
 
