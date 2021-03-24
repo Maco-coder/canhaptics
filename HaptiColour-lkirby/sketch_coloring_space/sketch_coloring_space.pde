@@ -182,7 +182,7 @@ void setup() {
   createBrushes();
   createPalettes();
   createColorPicker(palettes.get(0));
-
+  
   world.draw();
 
 
@@ -272,7 +272,7 @@ class SimulationThread implements Runnable {
     }
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
-    C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                   ;
+    //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
     //println(playerToken.h_avatar.getTouching())                                             ;
 
 
@@ -288,9 +288,6 @@ class SimulationThread implements Runnable {
     } else {
         playerToken.h_avatar.setDamping(500);
     }
-    
-    //if(playerToken.h_avatar.isTouchingBody(wallToWorldList)){
-    //}
     
 
     world.step(1.0f/1000.0f);
@@ -364,21 +361,22 @@ void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsExceptio
   FBox wall;
   for (Wall item : wallList) {
     /* creation of wall */
-    wall = new FBox(item.getW(), item.getH());
+    wall = new FBox(item.getW(), item.getH()) ;
     wall.setPosition(item.getX(), item.getY());
     wall.setStatic(true);
     color c;
     if (BEGIN_IN_DRAWING_MODE) {
-      c = color(0, 0, 0);
+      c = color(0, 0, 0)  ;
     } else {
       c = color(0, 255, 0);
     }
-    wall.setFillColor(c);
+    wall.setFillColor(c)  ;
     wall.setStrokeColor(c);
     wallToWorldList.put(item, wall); //associate wallList item to FBox representation
-    world.add(wall);
-  }
+    world.add(wall)       ;
+    }
 }
+
 
 void createPlayerToken(float x, float y) {
   /* Player circle */
@@ -392,12 +390,13 @@ void createPlayerToken(float x, float y) {
 }
 
 void setWallFlexibility(boolean flexibility, int wallColor) {
-  FBox wallInWorld;
+  FBox wallInWorld ;
   for (Wall item : wallList) {
     wallInWorld = wallToWorldList.get(item);
     wallInWorld.setSensor(flexibility)     ;
     wallInWorld.setFillColor(wallColor)    ;
     wallInWorld.setStrokeColor(wallColor)  ;
+    world.add(wallInWorld)                 ;
   }
 }
 
@@ -538,7 +537,6 @@ void checkChangeColor(){
   for(int i=0; i<palette.getLength(); i++){
     if(colorSwatch[i].isTouchingBody(playerToken.h_avatar)){
       setDrawingColor(palette.getSwatch(i).getColor());
-      //playerToken.h_avatar.setDamping(900)            ;
     }
   }
 }
@@ -575,9 +573,9 @@ void setUpDevice() {
 
 
   /* 2D physics scaling and world creation */
-  hAPI_Fisica.init(this); 
+  hAPI_Fisica.init(this) ;
   hAPI_Fisica.setScale(pixelsPerCentimeter); 
-  world               = new FWorld();
+  world               = new FWorld()       ;
 }
 
 void createBrushes() {
@@ -600,4 +598,6 @@ void createLayers() {
   //layers[1] = createGraphics((int)worldWidth*40, (int)worldHeight*40 + 2);
   //layers[2] = createGraphics((int)worldWidth*40, (int)worldHeight*40 + 2);
 }
+
+
 /* end helper functions section ****************************************************************************************/
