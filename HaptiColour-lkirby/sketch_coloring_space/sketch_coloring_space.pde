@@ -273,7 +273,7 @@ class SimulationThread implements Runnable {
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
     //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
-    println(playerToken.h_avatar.getTouching())                                               ;
+    //println(playerToken.h_avatar.getTouching())                                             ;
     
 
     playerToken.updateCouplingForce();
@@ -373,11 +373,13 @@ void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsExceptio
     } else {
       c = color(0, 255, 0);
     }
-    wall.setFillColor(c)  ;
-    wall.setStrokeColor(c);
-    wallToWorldList.put(item, wall); //associate wallList item to FBox representation
-    world.add(wall)       ;
-    }
+    wall.setFillColor(c)            ;
+    wall.setStrokeColor(c)          ;
+    wallToWorldList.put(item, wall) ; //associate wallList item to FBox representation
+    world.add(wall)                 ;
+    wall.setName(wall.toString())   ;
+    println(wall.getX(),wall.getY());
+  }
 }
 
 
@@ -511,11 +513,11 @@ void createColorPicker(ColorPalette palette) {
   ColorSwatch swatch;
   for (Integer i=0; i< 6; i++) {
     x = edgeBottomRightX - 1.25*(i+1);
-    y = edgeBottomRightY - 1.8;
-    colorSwatch[i] = new FBox(1, 1);
-    colorSwatch[i].setPosition(x, y);
-    colorSwatch[i].setStatic(true);
-    colorSwatch[i].setSensor(true);
+    y = edgeBottomRightY - 1.8       ;
+    colorSwatch[i] = new FBox(1, 1)  ;
+    colorSwatch[i].setPosition(x, y) ;
+    colorSwatch[i].setStatic(true)   ;
+    colorSwatch[i].setSensor(true)   ;
     colorSwatch[i].setName(i.toString());
 
     swatch = palette.getSwatch(i);
