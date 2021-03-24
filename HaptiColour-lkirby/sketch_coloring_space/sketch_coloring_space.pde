@@ -16,10 +16,10 @@
 
 
 /* library imports *****************************************************************************************************/
-import processing.serial.*;
-import static java.util.concurrent.TimeUnit.*;
-import java.util.concurrent.*;
-import controlP5.*;
+import processing.serial.*                      ;
+import static java.util.concurrent.TimeUnit.*   ;
+import java.util.concurrent.*                   ;
+import controlP5.*                              ;
 import java.util.ConcurrentModificationException;
 /* end library imports *************************************************************************************************/
 
@@ -160,13 +160,13 @@ void setup() {
   /* world conditions setup */
   world.setGravity((0.0), (1.0)); //1000 cm/(s^2)
   world.setEdges((edgeTopLeftX), (edgeTopLeftY), (edgeBottomRightX), (edgeBottomRightY)); 
-  world.setEdgesRestitution(.4);
-  world.setEdgesFriction(0.5);
+  world.setEdgesRestitution(.4) ;
+  world.setEdgesFriction(0.5)   ;
 
 
 
 /* Translucent circle */
-  C = new FCircle(1.5)  ;
+  C = new FCircle(1.25) ;
   C.setDensity(1)       ;
   C.setSensor(true)     ;
   C.setNoFill()         ;
@@ -179,7 +179,7 @@ void setup() {
 
 
 
-  createBrushes();
+  createBrushes() ;
   createPalettes();
   createColorPicker(palettes.get(0));
   
@@ -264,15 +264,14 @@ class SimulationThread implements Runnable {
 
     if (haplyBoard.data_available()) {
       /* GET END-EFFECTOR STATE (TASK SPACE) */
-      widgetOne.device_read_data();
-
-      angles.set(widgetOne.get_device_angles()); 
+      widgetOne.device_read_data()                            ;
+      angles.set(widgetOne.get_device_angles())               ;
       posEE.set(widgetOne.get_device_position(angles.array()));
-      posEE.set(posEE.copy().mult(200));
+      posEE.set(posEE.copy().mult(200))                       ;
     }
 
     playerToken.setToolPosition(edgeTopLeftX+worldWidth/2-(posEE).x, edgeTopLeftY+(posEE).y-7); 
-    //C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
+    C.setPosition(playerToken.h_avatar.getX(), playerToken.h_avatar.getY())                 ;
     //println(playerToken.h_avatar.getTouching())                                             ;
     
 
@@ -286,28 +285,34 @@ class SimulationThread implements Runnable {
     if((playerToken.h_avatar.isTouchingBody(colorSwatch[0])) || (playerToken.h_avatar.isTouchingBody(colorSwatch[1])) || (playerToken.h_avatar.isTouchingBody(colorSwatch[2])) || (playerToken.h_avatar.isTouchingBody(colorSwatch[3])) || (playerToken.h_avatar.isTouchingBody(colorSwatch[4])) || (playerToken.h_avatar.isTouchingBody(colorSwatch[5]))){
       playerToken.h_avatar.setDamping(850);
     } else {
-        playerToken.h_avatar.setDamping(500);
+        playerToken.h_avatar.setDamping(200);
     }
     
-    //if(playerToken.h_avatar.isTouchingBody()){
-      
-    //}
+    playerToken.h_avatar.setDamping(200);    
+    C.setStroke(0,0,0)                  ;
     
+    FBox wallInWorld1 ;
+    for (Wall item : wallList) {
+      wallInWorld1 = wallToWorldList.get(item);
+      if(C.isTouchingBody(wallInWorld1)){
+        playerToken.h_avatar.setDamping(850)  ;
+        C.setStroke(255,0,0)                  ;
+      }
+    }
 
     world.step(1.0f/1000.0f);
-    renderingForce = false;
+    renderingForce = false  ;
   }
 }
 /* end simulation section **********************************************************************************************/
 
-
-
 /* helper functions section, place helper functions here ***************************************************************/
 
+
 ArrayList<Wall> parseTextFile() throws incorrectMazeDimensionsException {
-  wallList = new ArrayList<Wall>();
+  wallList = new ArrayList<Wall>()           ;
   wallToWorldList = new HashMap<Wall, FBox>();
-  Wall w;
+  Wall w                                     ;
 
   String[] lines = loadStrings(FILENAME);
 
@@ -367,19 +372,19 @@ void createMaze(ArrayList<Wall> wallList) throws incorrectMazeDimensionsExceptio
     wall = new FBox(item.getW(), item.getH()) ;
     wall.setPosition(item.getX(), item.getY());
     wall.setStatic(true);
-    color c;
+    color c             ;
     if (BEGIN_IN_DRAWING_MODE) {
       c = color(0, 0, 0)  ;
     } else {
       c = color(0, 255, 0);
     }
-    wall.setFillColor(c)            ;
-    wall.setStrokeColor(c)          ;
-    wallToWorldList.put(item, wall) ; //associate wallList item to FBox representation
-    world.add(wall)                 ;
-    wall.setName(item.toString())   ;
-    println(item.getX(),item.getY());
-    println(wall.getName())         ;
+    wall.setFillColor(c)              ;
+    wall.setStrokeColor(c)            ;
+    wallToWorldList.put(item, wall)   ; //associate wallList item to FBox representation
+    world.add(wall)                   ;
+    wall.setName(item.toString())     ;
+    println(item.getX(),item.getY())  ;
+    println(wall.getName())           ;
     println(wallToWorldList.get(item));
   }
 }
@@ -408,7 +413,8 @@ void setWallFlexibility(boolean flexibility, int wallColor) {
 
 private void disengageDrawingMode() {
   setWallFlexibility(true, color(0, 255, 0));
-  drawingModeEngaged = false;
+  playerToken.h_avatar.setDamping(200)      ;
+  drawingModeEngaged = false                ;
 }
 
 private void engageDrawingMode() {
