@@ -1,7 +1,7 @@
 /**
  **********************************************************************************************************************
  * @file       lab2.pde
- * @author     Linnea Kirby, Preeti Vyas, Marco Moran
+ * @author     Linnea Kirby, Preeti Vyas, Marco Moran-Ledesma
  * @date       01-March-2021
  * @brief      haptic maze loader based off of 
  - "sketch_4_Wall_Physics.pde" by Steve Ding and Colin Gallacher
