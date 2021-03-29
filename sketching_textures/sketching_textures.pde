@@ -467,13 +467,16 @@ class SimulationThread implements Runnable{
     
     if (s.h_avatar.isTouchingBody(area1)) {
       
-      float a = 0.0          ;
-      float inc = TWO_PI/25.0;
+      fEE.x = random(-1.25,1.25);
+      fEE.y = random(-1.25,1.25);
       
-        for (int i = 0; i < 100; i=i+4) {
-          fEE.x = random((7*sin(a)),(-7*sin(a)));
-          a = a + inc                           ;
-        }
+      //float a = 0.0          ;
+      //float inc = TWO_PI/25.0;
+      
+      //  for (int i = 0; i < 100; i=i+4) {
+      //    fEE.x = random((7*sin(a)),(-7*sin(a)));
+      //    a = a + inc                           ;
+      //  }
     }
    
     
@@ -562,7 +565,7 @@ class SimulationThread implements Runnable{
           s.h_avatar.setDamping(random(975,995)) ;
           //s.h_avatar.setVelocity(random(80,100),random(-80,-100)) ;
         } else {
-          s.h_avatar.setDamping(500) ;
+          s.h_avatar.setDamping(300) ;
         }
     
     } else if (s.h_avatar.isTouchingBody(area4)) {
